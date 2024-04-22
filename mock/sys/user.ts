@@ -5,11 +5,11 @@ export function createFakeUserList() {
   return [
     {
       userId: '1',
-      username: 'vben',
+      username: 'admin',
       realName: 'Vben Admin',
       avatar: '',
       desc: 'manager',
-      password: '123456',
+      password: '123123',
       token: 'fakeToken1',
       homePath: '/dashboard/analysis',
       roles: [
@@ -46,7 +46,7 @@ const fakeCodeList: any = {
 export default [
   // mock user login
   {
-    url: '/basic-api/login',
+    url: '/account/login/',
     timeout: 200,
     method: 'post',
     response: ({ body }) => {
@@ -69,7 +69,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/getUserInfo',
+    url: '/account/getUserInfo/',
     method: 'get',
     response: (request: requestParams) => {
       const token = getRequestToken(request);
@@ -82,7 +82,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/getPermCode',
+    url: '/account/getPermCode/',
     timeout: 200,
     method: 'get',
     response: (request: requestParams) => {
@@ -98,7 +98,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/logout',
+    url: '/account/logout/',
     timeout: 200,
     method: 'get',
     response: (request: requestParams) => {
@@ -112,7 +112,7 @@ export default [
     },
   },
   {
-    url: '/basic-api/testRetry',
+    url: '/account/testRetry/',
     statusCode: 405,
     method: 'get',
     response: () => {

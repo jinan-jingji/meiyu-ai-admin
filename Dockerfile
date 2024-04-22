@@ -1,5 +1,5 @@
 # node 构建
-FROM node:16-alpine as build-stage
+FROM node:18-alpine as build-stage
 # 署名
 MAINTAINER Adoin 'adoin@qq.com'
 WORKDIR /app
@@ -9,7 +9,7 @@ RUN npm config set registry https://registry.npmmirror.com
 # 设置--max-old-space-size
 ENV NODE_OPTIONS=--max-old-space-size=16384
 # 设置阿里镜像、pnpm、依赖、编译
-RUN npm install pnpm -g && \
+RUN npm install pnpm@9.0.4 -g && \
     pnpm install --frozen-lockfile && \
     pnpm build:docker
 # node部分结束
