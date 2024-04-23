@@ -17,7 +17,7 @@ const testRoute: AppRouteModule = {
       name: 'TestPage',
       component: () => import('@/views/dashboard/analysis/index.vue'),
       meta: {
-        title: '测试页面',
+        title: '测试页',
       },
     },
   ],
