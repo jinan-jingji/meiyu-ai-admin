@@ -10,6 +10,14 @@ export interface RegistrationResult {
   email: string;
 }
 
+export interface PasswordResetParams {
+  email: string;
+}
+
+export interface PasswordResetResult {
+  info: string;
+}
+
 /**
  * @description: Login interface parameters
  */

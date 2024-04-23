@@ -2,6 +2,8 @@ import { defHttp } from '@/utils/http/axios';
 import {
   RegistrationResult,
   RegistrationParams,
+  PasswordResetParams,
+  PasswordResetResult,
   LoginParams,
   LoginResultModel,
   GetUserInfoModel,
@@ -11,6 +13,7 @@ import { ErrorMessageMode } from '#/axios';
 
 enum Api {
   Register = '/account/register/',
+  passwordReset = '/account/passwordReset/',
   Login = '/account/login/',
   Logout = '/account/logout/',
   GetUserInfo = '/account/getUserInfo/',
@@ -25,6 +28,13 @@ enum Api {
 export function registerApi(params: RegistrationParams) {
   return defHttp.post<RegistrationResult>({
     url: Api.Register,
+    params,
+  });
+}
+
+export function passwordResetApi(params: PasswordResetParams) {
+  return defHttp.post<PasswordResetResult>({
+    url: Api.passwordReset,
     params,
   });
 }

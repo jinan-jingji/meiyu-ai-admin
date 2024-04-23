@@ -6,6 +6,7 @@ import type {
 } from 'ant-design-vue/lib/form/interface';
 import { ref, computed, unref, Ref } from 'vue';
 import { useI18n } from '@/hooks/web/useI18n';
+// import { EmitFlags } from 'typescript';
 
 export enum LoginStateEnum {
   LOGIN,
@@ -62,6 +63,22 @@ export function useFormRules(formData?: Recordable) {
     return !value ? Promise.reject(t('sys.login.policyPlaceholder')) : Promise.resolve();
   };
 
+  // 定义 Email 表单规则
+  const getEmailFormRule = computed(() => {
+    return [
+      {
+        required: true, // 必填字段
+        message: '请输入邮箱地址', // 提示消息
+        trigger: 'change', // 触发验证时机
+      },
+      {
+        type: 'email', // 类型为email
+        message: '邮箱格式不匹配', // 当类型不匹配时的提示消息
+        trigger: ['blur', 'change'], // 触发验证的时机
+      },
+    ] as RuleObject[]; // 强制类型断言确保符合 RuleObject 数组
+  });
+
   const validateConfirmPassword = (password: string) => {
     return async (_: RuleObject, value: string) => {
       if (!value) {
@@ -89,6 +106,7 @@ export function useFormRules(formData?: Recordable) {
       case LoginStateEnum.REGISTER:
         return {
           account: accountFormRule,
+          email: unref(getEmailFormRule),
           password: passwordFormRule,
           confirmPassword: [
             { validator: validateConfirmPassword(formData?.password), trigger: 'change' },
@@ -100,8 +118,9 @@ export function useFormRules(formData?: Recordable) {
       // reset password form rules
       case LoginStateEnum.RESET_PASSWORD:
         return {
-          account: accountFormRule,
-          ...mobileRule,
+          // account: accountFormRule,
+          email: unref(getEmailFormRule),
+          // ...mobileRule,
         };
 
       // mobile form rules
